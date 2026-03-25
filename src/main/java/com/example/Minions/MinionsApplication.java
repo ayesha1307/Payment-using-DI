@@ -1,19 +1,24 @@
 package com.example.Minions;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class MinionsApplication {
 
     public static void main(String[] args) {
+        SpringApplication.run(MinionsApplication.class, args);
+    }
 
-        ApplicationContext context =
-                SpringApplication.run(MinionsApplication.class, args);
+    @Bean
+    CommandLineRunner run(PaymentManager pm) {
+        return args -> {
 
-        PaymentManager pm = context.getBean(PaymentManager.class);
+            System.out.println("Spring Started");
 
-        pm.processPayment(500);
+            pm.processPayment(500);
+        };
     }
 }
